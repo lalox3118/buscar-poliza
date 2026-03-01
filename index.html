@@ -32,15 +32,9 @@
 
   .container { width: 100%; max-width: 480px; }
 
-  .header {
-    text-align: center;
-    margin-bottom: 2rem;
-    animation: fadeDown 0.7s ease both;
-  }
-
+  .header { text-align: center; margin-bottom: 2rem; animation: fadeDown 0.7s ease both; }
   .logo-mark { display: inline-block; margin-bottom: 1rem; }
   .logo-mark svg { width: 50px; height: 50px; filter: drop-shadow(0 4px 16px rgba(180,185,200,0.18)); }
-
   .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; color: var(--white); }
   .brand-name span { color: var(--silver); }
   .brand-sub { font-size: 0.65rem; letter-spacing: 0.28em; color: var(--silver); text-transform: uppercase; margin-top: 0.25rem; }
@@ -106,12 +100,7 @@
   }
 
   .co-btn:hover { border-color: var(--silver); color: var(--white); background: rgba(176,181,192,0.07); }
-
-  .co-btn.active {
-    border-color: var(--silver-light);
-    background: rgba(176,181,192,0.15);
-    color: var(--white);
-  }
+  .co-btn.active { border-color: var(--silver-light); background: rgba(176,181,192,0.15); color: var(--white); }
 
   .btn-wa {
     width: 100%;
@@ -135,14 +124,7 @@
   }
 
   .btn-wa svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
-
-  .btn-wa:hover {
-    border-color: rgba(37,211,102,0.65);
-    background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12));
-    box-shadow: 0 6px 24px rgba(37,211,102,0.12);
-    transform: translateY(-1px);
-  }
-
+  .btn-wa:hover { border-color: rgba(37,211,102,0.65); background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12)); box-shadow: 0 6px 24px rgba(37,211,102,0.12); transform: translateY(-1px); }
   .btn-wa:active { transform: translateY(0); }
 
   .toast {
@@ -196,8 +178,8 @@
     <div class="card-desc">Ingresá los datos y enviá la consulta por WhatsApp</div>
 
     <div class="form-group">
-      <label for="nombre">Titular de póliza</label>
-      <input type="text" id="nombre" placeholder="Apellido y nombre del titular">
+      <label for="titular">Titular de póliza</label>
+      <input type="text" id="titular" placeholder="Apellido y nombre del titular">
     </div>
 
     <div class="form-group">
@@ -232,15 +214,8 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
-  }
-
-  // Company selector
   let companiaSeleccionada = '';
+
   document.querySelectorAll('.co-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.co-btn').forEach(b => b.classList.remove('active'));
@@ -249,431 +224,6 @@
     });
   });
 
-  function enviar() {
-    const nombre  = document.getElementById('nombre').value.trim();
-    const dni     = document.getElementById('dni').value.trim();
-    const patente = document.getElementById('patente').value.trim().toUpperCase();
-
-    if (!nombre && !dni && !patente) {
-      showToast('⚠ Ingresá al menos un dato');
-      return;
-    }
-
-    if (!companiaSeleccionada) {
-      showToast('⚠ Seleccioná una compañía');
-      return;
-    }
-
-    let msg = `🔍 *CONSULTA DE PÓLIZA*\n\n`;
-    msg += `🏢 *Compañía:* ${companiaSeleccionada}\n`;
-    if (nombre)  msg += `👤 *Titular:* ${nombre}\n`;
-    if (dni)     msg += `🪪 *DNI:* ${dni}\n`;
-    if (patente) msg += `🚗 *Patente:* ${patente}\n`;
-
-    window.open(`https://wa.me/543413221063?text=${encodeURIComponent(msg)}`, '_blank');
-    showToast('✓ Abriendo WhatsApp…');
-  }
-</script>
-</body>
-</html>
-
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buscar Póliza – Leandro Sanchez</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap');
-
-  :root {
-    --dark: #2b2d3a;
-    --darker: #1e202b;
-    --silver: #b0b5c0;
-    --silver-light: #d4d8e0;
-    --white: #f0f2f5;
-    --border: rgba(176,181,192,0.25);
-    --accent: rgba(176,181,192,0.12);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: var(--darker);
-    min-height: 100vh;
-    font-family: 'Raleway', sans-serif;
-    color: var(--white);
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 2rem 1rem 3rem;
-    background-image: radial-gradient(ellipse at 70% 20%, rgba(180,185,200,0.06) 0%, transparent 60%),
-                      radial-gradient(ellipse at 20% 80%, rgba(100,105,130,0.08) 0%, transparent 50%);
-  }
-
-  .container { width: 100%; max-width: 620px; }
-
-  /* Header */
-  .header {
-    text-align: center;
-    margin-bottom: 2rem;
-    animation: fadeDown 0.7s ease both;
-  }
-
-  .logo-mark { display: inline-block; margin-bottom: 1rem; }
-  .logo-mark svg { width: 50px; height: 50px; filter: drop-shadow(0 4px 16px rgba(180,185,200,0.18)); }
-
-  .brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.9rem;
-    font-weight: 600;
-    color: var(--white);
-  }
-  .brand-name span { color: var(--silver); }
-  .brand-sub {
-    font-size: 0.65rem;
-    letter-spacing: 0.28em;
-    color: var(--silver);
-    text-transform: uppercase;
-    margin-top: 0.25rem;
-  }
-
-  /* Card */
-  .card {
-    background: rgba(43,45,58,0.9);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem 2rem 1.5rem;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
-    animation: fadeUp 0.7s 0.15s ease both;
-    margin-bottom: 1rem;
-  }
-
-  .card-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: var(--silver-light);
-    margin-bottom: 0.25rem;
-  }
-
-  .card-desc {
-    font-size: 0.74rem;
-    color: var(--silver);
-    letter-spacing: 0.06em;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  /* Search fields */
-  .search-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .field-group label {
-    display: block;
-    font-size: 0.62rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--silver);
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-  }
-
-  .field-group input {
-    width: 100%;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 0.7rem 0.8rem;
-    color: var(--white);
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.84rem;
-    outline: none;
-    transition: border-color 0.2s, background 0.2s;
-  }
-
-  .field-group input::placeholder { color: rgba(176,181,192,0.35); }
-  .field-group input:focus {
-    border-color: var(--silver);
-    background: rgba(255,255,255,0.07);
-  }
-
-  /* Companies section */
-  .section-label {
-    font-size: 0.62rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--silver);
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-  }
-
-  .companies-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .company-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 1rem 1.1rem;
-    cursor: pointer;
-    transition: all 0.22s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .company-card:hover {
-    border-color: var(--silver);
-    background: var(--accent);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  }
-
-  .company-info { flex: 1; }
-
-  .company-name {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--white);
-    margin-bottom: 0.15rem;
-  }
-
-  .company-action {
-    font-size: 0.65rem;
-    color: var(--silver);
-    letter-spacing: 0.08em;
-  }
-
-  .company-icon {
-    width: 28px;
-    height: 28px;
-    background: var(--accent);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    color: var(--silver-light);
-    flex-shrink: 0;
-    transition: background 0.2s;
-  }
-
-  .company-card:hover .company-icon {
-    background: rgba(176,181,192,0.2);
-  }
-
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 1.2rem 0;
-  }
-
-  /* WhatsApp section */
-  .wa-section { }
-
-  .wa-btn {
-    width: 100%;
-    background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.08));
-    border: 1px solid rgba(37,211,102,0.35);
-    border-radius: 3px;
-    padding: 0.9rem 1rem;
-    color: rgba(150,230,170,0.95);
-    font-family: 'Raleway', sans-serif;
-    font-size: 0.76rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-  }
-
-  .wa-btn:hover {
-    border-color: rgba(37,211,102,0.6);
-    background: linear-gradient(135deg, rgba(37,211,102,0.22), rgba(37,211,102,0.12));
-    box-shadow: 0 6px 20px rgba(37,211,102,0.1);
-    transform: translateY(-1px);
-  }
-
-  .wa-btn svg { width: 16px; height: 16px; fill: currentColor; }
-
-  /* Toast notification */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(43,45,58,0.97);
-    border: 1px solid var(--silver);
-    border-radius: 3px;
-    padding: 0.8rem 1.5rem;
-    font-size: 0.78rem;
-    color: var(--silver-light);
-    letter-spacing: 0.08em;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    white-space: nowrap;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    z-index: 999;
-  }
-
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 1.2rem;
-    font-size: 0.65rem;
-    color: rgba(176,181,192,0.35);
-    letter-spacing: 0.1em;
-    animation: fadeUp 0.7s 0.3s ease both;
-  }
-
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 480px) {
-    .card { padding: 1.5rem 1.2rem; }
-    .search-grid { grid-template-columns: 1fr; }
-    .companies-grid { grid-template-columns: 1fr; }
-  }
-</style>
-</head>
-<body>
-
-<div class="container">
-
-  <div class="header">
-    <div class="logo-mark">
-      <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="10" y="8" width="8" height="36" fill="#b0b5c0"/>
-        <rect x="10" y="36" width="28" height="8" fill="#b0b5c0"/>
-        <rect x="22" y="16" width="6" height="26" fill="#8a8f9a"/>
-        <rect x="22" y="34" width="20" height="6" fill="#8a8f9a"/>
-      </svg>
-    </div>
-    <div class="brand-name">Leandro <span>Sanchez</span></div>
-    <div class="brand-sub">Asesor de Seguros</div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Búsqueda de Póliza</div>
-    <div class="card-desc">Ingresá los datos del asegurado y seleccioná la compañía para buscar</div>
-
-    <!-- Search fields -->
-    <div class="search-grid">
-      <div class="field-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" placeholder="Apellido y nombre">
-      </div>
-      <div class="field-group">
-        <label for="dni">DNI</label>
-        <input type="text" id="dni" placeholder="Sin puntos" maxlength="10">
-      </div>
-      <div class="field-group">
-        <label for="patente">Patente</label>
-        <input type="text" id="patente" placeholder="Ej: AB123CD" maxlength="10" style="text-transform:uppercase">
-      </div>
-    </div>
-
-    <!-- Companies -->
-    <div class="section-label">Seleccioná la compañía</div>
-    <div class="companies-grid">
-
-      <div class="company-card" onclick="openCompany('segurometal')">
-        <div class="company-info">
-          <div class="company-name">Segurometal</div>
-          <div class="company-action">Abrir portal de consulta</div>
-        </div>
-        <div class="company-icon">SM</div>
-      </div>
-
-      <div class="company-card" onclick="openCompany('triunfo')">
-        <div class="company-info">
-          <div class="company-name">Triunfo</div>
-          <div class="company-action">Abrir portal de consulta</div>
-        </div>
-        <div class="company-icon">TR</div>
-      </div>
-
-      <div class="company-card" onclick="openCompany('holando')">
-        <div class="company-info">
-          <div class="company-name">La Holando</div>
-          <div class="company-action">Abrir portal de consulta</div>
-        </div>
-        <div class="company-icon">LH</div>
-      </div>
-
-      <div class="company-card" onclick="openCompany('riouruguay')">
-        <div class="company-info">
-          <div class="company-name">Río Uruguay</div>
-          <div class="company-action">Abrir portal de consulta</div>
-        </div>
-        <div class="company-icon">RU</div>
-      </div>
-
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- WhatsApp -->
-    <div class="section-label">O enviá los datos por WhatsApp</div>
-    <button class="wa-btn" onclick="sendWhatsApp()">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      Enviar datos por WhatsApp
-    </button>
-  </div>
-
-  <div class="footer">© 2025 Leandro Sanchez · Asesor de Seguros · Uso interno</div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<script>
-  const companies = {
-    segurometal: {
-      name: 'Segurometal',
-      url: 'https://extranet.segurometal.com/SMAppProd/servlet/wwpolindi?VF1Y6QBNCE6OUrJWJeG6IQ=='
-    },
-    triunfo: {
-      name: 'Triunfo',
-      url: 'https://www.triunfoseguros.com.ar'
-    },
-    holando: {
-      name: 'La Holando',
-      url: 'https://www.laholando.com.ar'
-    },
-    riouruguay: {
-      name: 'Río Uruguay',
-      url: 'https://www.riouruguayseguros.com.ar'
-    }
-  };
-
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
@@ -681,38 +231,23 @@
     setTimeout(() => t.classList.remove('show'), 2800);
   }
 
-  function getData() {
-    return {
-      nombre:  document.getElementById('nombre').value.trim(),
-      dni:     document.getElementById('dni').value.trim(),
-      patente: document.getElementById('patente').value.trim().toUpperCase()
-    };
-  }
+  function enviar() {
+    const titular = document.getElementById('titular').value.trim();
+    const dni     = document.getElementById('dni').value.trim();
+    const patente = document.getElementById('patente').value.trim().toUpperCase();
 
-  function openCompany(key) {
-    const { nombre, dni, patente } = getData();
-    const co = companies[key];
-
-    if (!nombre && !dni && !patente) {
-      showToast('⚠ Ingresá al menos un dato antes de buscar');
+    if (!titular && !dni && !patente) {
+      showToast('⚠ Ingresá al menos un dato');
       return;
     }
-
-    // Open portal
-    window.open(co.url, '_blank');
-    showToast(`✓ Abriendo portal de ${co.name}…`);
-  }
-
-  function sendWhatsApp() {
-    const { nombre, dni, patente } = getData();
-
-    if (!nombre && !dni && !patente) {
-      showToast('⚠ Ingresá al menos un dato para enviar');
+    if (!companiaSeleccionada) {
+      showToast('⚠ Seleccioná una compañía');
       return;
     }
 
     let msg = `🔍 *CONSULTA DE PÓLIZA*\n\n`;
-    if (nombre)  msg += `👤 *Asegurado:* ${nombre}\n`;
+    msg += `🏢 *Compañía:* ${companiaSeleccionada}\n`;
+    if (titular) msg += `👤 *Titular:* ${titular}\n`;
     if (dni)     msg += `🪪 *DNI:* ${dni}\n`;
     if (patente) msg += `🚗 *Patente:* ${patente}\n`;
 
